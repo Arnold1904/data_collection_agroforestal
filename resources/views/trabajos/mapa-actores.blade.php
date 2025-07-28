@@ -1,11 +1,9 @@
 <x-sidebar-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Mapa de Actores') }}
-        </h2>
-    </x-slot>
-    <div class="py-8 max-w-6xl mx-auto">
-        <div id="network" style="height: 600px;"></div>
+    <div class="w-full bg-white dark:bg-gray-800 py-6 shadow text-center">
+        <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">Diagrama de mapeo de actores</h2>
+    </div>
+    <div class="w-full h-[calc(100vh-120px)]" style="height: calc(100vh - 120px);">
+        <div id="network" style="width:100vw; height:100%;"></div>
     </div>
     <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
     <link href="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.css" rel="stylesheet" />
@@ -46,8 +44,25 @@
             nodes: { font: { size: 16 } },
             edges: { font: { align: 'middle' }, color: { color: '#888' } },
             layout: { improvedLayout: true },
-            physics: { stabilization: true }
+            physics: false,
+            interaction: {
+                dragNodes: true,
+                dragView: true,
+                zoomView: true,
+                multiselect: true
+            },
+            manipulation: { enabled: false },
+            minZoom: 0.5,
+            maxZoom: 2,
+            autoResize: true,
+            height: '100%',
+            width: '100%',
+            restrictMove: true
         };
-        new vis.Network(document.getElementById('network'), data, options);
+        const network = new vis.Network(document.getElementById('network'), data, options);
+        // Limitar el movimiento para que no se pierda el diagrama
+        network.on('dragEnd', function () {
+            network.fit({ animation: true });
+        });
     </script>
 </x-sidebar-layout>
