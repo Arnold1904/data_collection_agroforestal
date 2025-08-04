@@ -1,18 +1,30 @@
 <x-sidebar-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-200 leading-tight">
             {{ __('Categorías') }}
         </h2>
     </x-slot>
-    <div class="py-4 acomodar">
+    <div class="py-8 max-w-6xl mx-auto">
         @if(session('success'))
             <div class="mb-4 text-green-700 bg-green-100 p-2 rounded">{{ session('success') }}</div>
         @endif
-        <a href="{{ route('categoria.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-bold">Nueva Categoría</a>
+        <div class="flex justify-between items-center mb-4">
+            <a href="{{ route('categoria.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-bold">Nueva Categoría</a>
+            <div class="flex space-x-2">
+                <button onclick="ExportUtils.exportToPDF('categorias-table', 'categorias')" 
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-medium">
+                    📄 PDF
+                </button>
+                <button onclick="ExportUtils.exportToExcel('categorias-table', 'categorias')" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm font-medium">
+                    📊 Excel
+                </button>
+            </div>
+        </div>
         <div class="overflow-x-auto mt-4">
-            <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow">
+            <table id="categorias-table" class="min-w-full bg-gray-800 rounded shadow">
                 <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 ">
+                    <tr class="bg-gray-700 text-gray-200 ">
                         <th class="px-4 py-2">N°</th>
                         <th class="px-4 py-2">Nombre</th>
                         <th class="px-4 py-2">Acciones</th>
@@ -20,7 +32,7 @@
                 </thead>
                 <tbody>
                     @foreach($categorias as $categoria)
-                        <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900">
+                        <tr class="border-b border-gray-700 hover:bg-gray-900">
                             <td class="text-center text-white px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="text-center text-white px-4 py-2">{{ $categoria->nombre_cat }}</td>
                             <td class="text-center px-4 py-2">
@@ -53,4 +65,6 @@
             </table>
         </div>
     </div>
+    
+    <script src="{{ asset('js/export-utils.js') }}"></script>
 </x-sidebar-layout>

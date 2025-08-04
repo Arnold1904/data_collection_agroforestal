@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 class="text-lg font-medium text-white">
             {{ __('Información del perfil') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-1 text-sm text-white">
             {{ __("Actualiza la información de tu cuenta y dirección de correo electrónico.") }}
         </p>
     </header>
@@ -30,16 +30,16 @@
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
+                    <p class="text-sm mt-2 text-white">
                         {{ __('Tu dirección de correo electrónico no está verificada.') }}
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <button form="send-verification" class="underline text-sm text-white hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ">
                             {{ __('Haz clic aquí para reenviar el correo electrónico de verificación.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+                        <p class="mt-2 font-medium text-sm text-green-400">
                             {{ __('Se ha enviado un nuevo enlace de verificación a tu dirección de correo electrónico.') }}
                         </p>
                     @endif
@@ -56,7 +56,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
+                    class="text-sm text-gray-400"
                 >{{ __('Guardado.') }}</p>
             @endif
         </div>

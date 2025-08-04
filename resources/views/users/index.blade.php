@@ -1,18 +1,30 @@
 <x-sidebar-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-200 leading-tight">
             {{ __('Usuarios') }}
         </h2>
     </x-slot>
     <div class="py-8 max-w-6xl mx-auto">
-        <a href="{{ route('users.create') }}" class="mb-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-bold">Nuevo Usuario</a>
+        <div class="flex justify-between items-center mb-4">
+            <a href="{{ route('users.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-bold">Nuevo Usuario</a>
+            <div class="flex space-x-2">
+                <button onclick="ExportUtils.exportToPDF('users-table', 'usuarios')" 
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-medium">
+                    📄 PDF
+                </button>
+                <button onclick="ExportUtils.exportToExcel('users-table', 'usuarios')" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm font-medium">
+                    📊 Excel
+                </button>
+            </div>
+        </div>
         @if(session('success'))
             <div class="mb-4 text-green-700 bg-green-100 p-2 rounded">{{ session('success') }}</div>
         @endif
         <div class="overflow-x-auto mt-4">
-            <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow text-sm sm:text-base">
+            <table id="users-table" class="min-w-full bg-gray-800 rounded shadow text-sm sm:text-base">
                 <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+                    <tr class="bg-gray-700 text-gray-200">
                         <th class="px-2 py-1 sm:px-4 sm:py-2">Nro</th>
                         <th class="px-2 py-1 sm:px-4 sm:py-2">Nombre</th>
                         <th class="px-2 py-1 sm:px-4 sm:py-2">Email</th>
@@ -22,7 +34,7 @@
                 </thead>
                 <tbody>
                     @foreach($users as $user)
-                        <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900">
+                        <tr class="border-b border-gray-700 hover:bg-gray-900">
                             <td class="px-2 text-white py-1 sm:px-4 sm:py-2">{{ $loop->iteration }}</td>
                             <td class="px-2 text-white py-1 sm:px-4 sm:py-2">{{ $user->name }}</td>
                             <td class="px-2 text-white py-1 sm:px-4 sm:py-2">{{ $user->email }}</td>
@@ -57,4 +69,6 @@
             </table>
         </div>
     </div>
+    
+    <script src="{{ asset('js/export-utils.js') }}"></script>
 </x-sidebar-layout>
