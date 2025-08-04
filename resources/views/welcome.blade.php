@@ -11,10 +11,10 @@
     <nav class="navbar navbar-expand-lg" style="background-color: #1F2937;">
         <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
-            <img src="{{ asset('images/agroforestal.png') }}" alt="Logo Agroforestal" width="auto" height="80px" class="d-inline-block align-text-top" />
+            <img src="{{ asset('images/agroforestal.webp') }}" alt="Logo Agroforestal" width="auto" height="80px" class="d-inline-block align-text-top" />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white;">
+            <span class="navbar-toggler-icon" style="background-image: url('data:image/svg+xml;charset=utf8,%3csvg viewBox=%270 0 30 30%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath stroke=%27rgba(255, 255, 255, 1)%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e');"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 align-items-center gap-2">
@@ -45,19 +45,19 @@
     {{-- Fila de Imágenes --}}
     <div class="row text-center">
         <div class="col-12 col-md-4 mb-4">
-            <img src="{{ asset('images/ingenieria-forestal-foto.jpg') }}" 
+            <img src="{{ asset('images/ingenieria-forestal-foto.webp') }}" 
                 class="img-fluid rounded shadow" 
                 style="height: 250px; width: 100%; object-fit: cover;" 
                 alt="Investigadores en bosque">
         </div>
         <div class="col-12 col-md-4 mb-4">
-            <img src="{{ asset('images/reforestacion-realizada-por-grupo-voluntario.jpg') }}" 
+            <img src="{{ asset('images/reforestacion-realizada-por-grupo-voluntario.webp') }}" 
                 class="img-fluid rounded shadow" 
                 style="height: 250px; width: 100%; object-fit: cover;" 
                 alt="Plantando un árbol">
         </div>
         <div class="col-12 col-md-4 mb-4">
-            <img src="{{ asset('images/biologo-en-un-bosque.jpg') }}" 
+            <img src="{{ asset('images/biologo-en-un-bosque.webp') }}" 
                 class="img-fluid rounded shadow" 
                 style="height: 250px; width: 100%; object-fit: cover;" 
                 alt="Examinando una hoja con lupa">
