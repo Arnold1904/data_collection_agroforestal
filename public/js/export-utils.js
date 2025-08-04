@@ -183,9 +183,9 @@ class ExportUtils {
             
             const { jsPDF } = window.jspdf;
             
-            // Capturar el contenedor de la red
+            // Capturar el contenedor de la red con fondo blanco
             const canvas = await html2canvas(networkContainer, {
-                backgroundColor: '#374151', // gray-700
+                backgroundColor: '#ffffff', // Fondo blanco
                 scale: 2,
                 useCORS: true,
                 allowTaint: true
@@ -237,9 +237,9 @@ class ExportUtils {
                 await this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
             }
             
-            // Capturar el contenedor de la red
+            // Capturar el contenedor de la red con fondo blanco
             const canvas = await html2canvas(networkContainer, {
-                backgroundColor: '#374151', // gray-700
+                backgroundColor: '#ffffff', // Fondo blanco
                 scale: 2,
                 useCORS: true,
                 allowTaint: true
