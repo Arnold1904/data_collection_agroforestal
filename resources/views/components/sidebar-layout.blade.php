@@ -1,6 +1,6 @@
 @php $user = auth()->user(); @endphp
 <x-app-layout>
-<div class="min-h-screen" style="background-color: #cbced4;" class="relative">
+<div class="min-h-screen" class="relative">
     <!-- Sidebar -->
     <aside x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" :class="open ? 'w-64' : 'w-16'" class="fixed top-0 left-0 h-full z-40 transition-all duration-500 ease-in-out bg-white dark:bg-gray-800 shadow-lg flex flex-col">
         <div class="h-16 flex items-center justify-center border-b border-gray-700" >
