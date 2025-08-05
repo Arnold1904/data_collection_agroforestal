@@ -63,19 +63,19 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="position: absolute; top: 0; left: 4rem; width: calc(100vw - 4rem); z-index: 50;">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-gray-800" style="position: absolute; top: 0; left: 4rem; width: calc(100vw - 4rem); z-index: 50;">
         <!-- Botón para cerrar el menú -->
-        <div class="flex justify-end p-2">
+        <div class="flex justify-end p-2 bg-gray-800">
             <button @click="open = false" class="p-2 rounded bg-red-600 text-white font-bold hover:bg-red-700">Cerrar ✕</button>
         </div>
-        <div class="pt-2 pb-3 space-y-1" style="background-color: #1e3a8a;">
+        <div class="pt-2 pb-3 space-y-1 bg-gray-800">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-blue-800" style="background-color: #1e40af;">
+        <div class="pt-4 pb-1 border-t border-gray-700 bg-gray-800">
             <div class="px-4">
                 <div class="font-medium text-base text-white">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-200">{{ Auth::user()->email }}</div>
