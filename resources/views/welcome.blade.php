@@ -20,7 +20,7 @@
             <ul class="navbar-nav mb-2 mb-lg-0 align-items-center gap-2">
             @if (Route::has('login'))
                 <li class="nav-item">
-                <a class="btn btn-light px-3 py-1" href="{{ route('login') }}">Login</a>
+                <a class="btn btn-light px-3 py-1" href="{{ route('login') }}">Iniciar Sesión</a>
                 </li>
                 @if (Route::has('register'))
                 <li class="nav-item">
