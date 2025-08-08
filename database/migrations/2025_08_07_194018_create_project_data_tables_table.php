@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rol_sector_agropecuarios', function (Blueprint $table) {
+        Schema::create('project_data_tables', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
+            $table->string('nombre')->default('Datos');
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rol_sector_agropecuarios');
+        Schema::dropIfExists('project_data_tables');
     }
 };

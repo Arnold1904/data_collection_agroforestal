@@ -2,3 +2,154 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== ESTILOS PERSONALIZADOS DE SCROLLBAR ===== */
+
+/* Resetear scrollbar global para que no interfiera con navegación */
+* {
+    scrollbar-width: auto;
+}
+
+/* Scrollbar SOLO para el contenido principal (no navigation/sidebar) */
+.main-content::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar,
+main::-webkit-scrollbar {
+    width: 16px;
+}
+
+.main-content::-webkit-scrollbar-track,
+.overflow-x-auto::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track,
+main::-webkit-scrollbar-track {
+    background: #374151; /* bg-gray-700 */
+    border-radius: 8px;
+    margin: 2px;
+}
+
+.main-content::-webkit-scrollbar-thumb,
+.overflow-x-auto::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb,
+main::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 8px;
+    border: 2px solid #374151;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.main-content::-webkit-scrollbar-thumb:hover,
+.overflow-x-auto::-webkit-scrollbar-thumb:hover,
+.table-responsive::-webkit-scrollbar-thumb:hover,
+main::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.main-content::-webkit-scrollbar-thumb:active,
+.overflow-x-auto::-webkit-scrollbar-thumb:active,
+.table-responsive::-webkit-scrollbar-thumb:active,
+main::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(135deg, #4338ca, #6d28d9);
+}
+
+.main-content::-webkit-scrollbar-corner,
+.overflow-x-auto::-webkit-scrollbar-corner,
+.table-responsive::-webkit-scrollbar-corner,
+main::-webkit-scrollbar-corner {
+    background: #374151;
+}
+
+/* Scrollbar para elementos específicos como modales */
+.modal-body::-webkit-scrollbar,
+.card-body::-webkit-scrollbar {
+    width: 12px;
+}
+
+.modal-body::-webkit-scrollbar-track,
+.card-body::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 6px;
+}
+
+.modal-body::-webkit-scrollbar-thumb,
+.card-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #6b7280, #9ca3af);
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover,
+.card-body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #4b5563, #6b7280);
+}
+
+/* Efecto de resplandor para la barra lateral */
+.bg-gray-700 {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* Animación suave para la barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+    transition: all 0.3s ease;
+}
+
+/* Mejorar el contraste de la barra en elementos oscuros */
+.bg-gray-700::-webkit-scrollbar-track,
+.bg-gray-800::-webkit-scrollbar-track {
+    background: #1f2937; /* bg-gray-800 */
+}
+
+.bg-gray-700::-webkit-scrollbar-thumb,
+.bg-gray-800::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: 2px solid #1f2937;
+}
+
+.bg-gray-700::-webkit-scrollbar-thumb:hover,
+.bg-gray-800::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+/* ===== ESTILOS ADICIONALES PARA UI MEJORADA ===== */
+
+/* Efectos de hover para cards */
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Botones con efectos mejorados */
+.btn {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Inputs con mejor apariencia */
+.form-control:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+}
+
+/* Badges mejorados */
+.badge {
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+/* Animaciones suaves para modales */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
