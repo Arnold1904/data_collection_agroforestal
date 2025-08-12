@@ -214,6 +214,67 @@ const defaultColumnColors = {
     'Actor': '#4CAF50'  // Solo guardamos el color base para actores
 };
 
+// Función para mostrar mensajes personalizados cuando no hay datos
+function showCustomEmptyMessage(title, message, iconClass) {
+    console.log('Mostrando mensaje personalizado:', title);
+    const networkContainer = document.getElementById('network');
+    if (!networkContainer) {
+        console.error('No se encontró el contenedor network');
+        return;
+    }
+    
+    networkContainer.innerHTML = `
+        <div class="flex justify-center items-center" style="height: 500px;">
+            <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-md w-full mx-4 border border-gray-700">
+                <div class="text-center">
+                    <!-- Icono con gradiente -->
+                    <div class="mb-6 relative">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                            <i class="${iconClass} text-2xl text-white"></i>
+                        </div>
+                        <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-blue-600 rounded-full opacity-30 blur animate-pulse"></div>
+                    </div>
+                    
+                    <!-- Título -->
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        ${title}
+                    </h3>
+                    
+                    <!-- Mensaje -->
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        ${message}
+                    </p>
+                    
+                    <!-- Línea decorativa -->
+                    <div class="w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mb-6 rounded-full"></div>
+                    
+                    <!-- Sugerencias -->
+                    <div class="bg-gray-700 rounded-lg p-4 border border-gray-600">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-lightbulb text-yellow-400 mr-2"></i>
+                            <span class="text-sm font-medium text-gray-200">Sugerencias:</span>
+                        </div>
+                        <ul class="text-xs text-gray-400 text-left space-y-1">
+                            <li class="flex items-center">
+                                <i class="fas fa-plus text-green-400 mr-2 text-xs"></i>
+                                Agrega registros en la sección de proyectos
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-table text-blue-400 mr-2 text-xs"></i>
+                                Configura las columnas de datos necesarias
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-users text-purple-400 mr-2 text-xs"></i>
+                                Define actores e influencias para la visualización
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // Inicializar al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Iniciando visualización...');
@@ -221,6 +282,18 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Columnas disponibles:', availableColumns);
     
     initializeColorConfiguration();
+    
+    // Verificar si mostrar mensaje personalizado
+    if (currentProjectData.length === 0 && oldSystemData.length === 0) {
+        console.log('No hay datos disponibles - mostrando mensaje personalizado');
+        showCustomEmptyMessage(
+            'Sin datos para visualizar', 
+            'No hay registros disponibles para generar el mapa de actores. Agrega algunos datos para comenzar.',
+            'fas fa-database'
+        );
+        return;
+    }
+    
     updateVisualization();
     
     // Event listeners para checkboxes
@@ -470,7 +543,12 @@ function updateVisualization() {
             console.log('Auto-seleccionando columnas:', autoSelected);
             selectedColumns.push(...autoSelected);
         } else {
-            alert('No hay columnas disponibles para visualizar');
+            console.log('No hay columnas disponibles - mostrando mensaje personalizado');
+            // Mostrar mensaje personalizado de que no hay datos
+            showCustomEmptyMessage('No hay columnas disponibles', isNewProject ? 
+                'Selecciona un proyecto y agrega algunas columnas para ver la visualización del mapa de actores.' : 
+                'No hay columnas configuradas en el sistema para mostrar.'
+            , 'fas fa-database');
             return;
         }
     }
@@ -487,18 +565,11 @@ function updateVisualization() {
         data = prepareOldSystemVisualization(selectedColumns);
     } else {
         console.log('No hay datos disponibles');
-        // Mostrar mensaje de que no hay datos
-        document.getElementById('network').innerHTML = `
-            <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
-                <div class="text-center">
-                    <i class="fas fa-exclamation-triangle fa-4x text-muted mb-3"></i>
-                    <h5 class="text-muted">No hay datos para visualizar</h5>
-                    <p class="text-muted">
-                        ${isNewProject ? 'Agrega algunos registros al proyecto para ver la visualización.' : 'No hay datos disponibles en el sistema.'}
-                    </p>
-                </div>
-            </div>
-        `;
+        // Mostrar mensaje personalizado de que no hay datos
+        showCustomEmptyMessage('No hay datos para visualizar', isNewProject ? 
+            'Agrega algunos registros al proyecto para ver la visualización del mapa de actores.' : 
+            'No hay datos disponibles en el sistema para mostrar.'
+        , 'fas fa-exclamation-triangle');
         return;
     }
     
@@ -506,15 +577,10 @@ function updateVisualization() {
     
     if (data.nodes.length === 0) {
         console.log('No se generaron nodos');
-        document.getElementById('network').innerHTML = `
-            <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
-                <div class="text-center">
-                    <i class="fas fa-info-circle fa-4x text-muted mb-3"></i>
-                    <h5 class="text-muted">Sin datos suficientes</h5>
-                    <p class="text-muted">Agrega más registros para generar la visualización de red.</p>
-                </div>
-            </div>
-        `;
+        showCustomEmptyMessage('Sin datos suficientes', 
+            'Necesitas agregar más registros para generar la visualización de red del mapa de actores.',
+            'fas fa-info-circle'
+        );
         return;
     }
     
@@ -1336,6 +1402,7 @@ function exportToPDF() {
 function exportChart() {
     exportToPNG();
 }
+
 </script>
 
 @endsection
