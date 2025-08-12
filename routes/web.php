@@ -3,17 +3,12 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RecoleccionDeDatosController;
-use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\RolSectorAgropecuarioController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectDataTableController;
-
-Route::resource('posts', PostController::class)->middleware(['auth', 'verified'])->names('posts');
 
 // Rutas específicas primero (sin parámetros)
 Route::middleware(['auth', 'verified', 'role:admin,profesor'])->group(function () {
@@ -73,15 +68,6 @@ Route::resource('users', UserController::class)
     ->names('users'); // Solo admin
 
 
-// Mapa de actores (debe ir antes del resource para evitar conflicto de parámetros)
-Route::get('/mapa-actores', [RecoleccionDeDatosController::class, 'mapaActores'])
-    ->middleware(['auth', 'role:admin,profesor,estudiante'])
-    ->name('mapa.actores');
-
-// CRUD de trabajos/gestión de usuarios (solo admin)
-Route::resource('trabajos', RecoleccionDeDatosController::class)
-    ->middleware(['auth', 'role:admin']);
-
 // Ruta para profesor (solo profesor)
 Route::get('/profesor', [ProfesorController::class, 'index'])
     ->middleware(['auth', 'role:profesor'])
@@ -92,16 +78,9 @@ Route::get('/visitante', [VisitanteController::class, 'index'])
     ->middleware(['auth', 'role:visitante'])
     ->name('visitante.index');
 
-// CRUD de Categoría
-Route::resource('categoria', CategoriaController::class)
-    ->middleware(['auth', 'role:admin'])
-    ->names('categoria')
-    ->parameters(['categoria' => 'categoria']);
-
-// CRUD de Rol Sector Agropecuario
-Route::resource('rol', RolSectorAgropecuarioController::class)
-    ->middleware(['auth', 'role:admin'])
-    ->names('rol');
-
+// Ruta para mapa de actores
+Route::get('/mapa-actores', [RecoleccionDeDatosController::class, 'mapaActores'])
+    ->name('mapa.actores')
+    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
