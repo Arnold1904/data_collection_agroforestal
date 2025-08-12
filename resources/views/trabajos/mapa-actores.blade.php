@@ -371,12 +371,12 @@ function generateColorConfigurationUI() {
                 <div class="lg:col-span-6">
                     <div class="flex items-center space-x-3">
                         <input type="color" 
-                               class="w-20 h-10 border-2 border-gray-500 rounded cursor-pointer" 
-                               value="${currentColor}"
-                               onchange="updateColumnTypeColor('${columnName}', this.value)">
+                            class="w-20 h-10 border-2 border-gray-500 rounded cursor-pointer" 
+                            value="${currentColor}"
+                            onchange="updateColumnTypeColor('${columnName}', this.value)">
                         <span class="px-4 py-2 rounded text-white font-bold text-sm" 
-                              style="background-color: ${currentColor};"
-                              id="preview_${columnName.replace(/\s+/g, '_')}">
+                            style="background-color: ${currentColor};"
+                            id="preview_${columnName.replace(/\s+/g, '_')}">
                             Vista previa
                         </span>
                     </div>
