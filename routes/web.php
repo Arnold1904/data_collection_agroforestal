@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RecoleccionDeDatosController;
 use App\Http\Controllers\CategoriaController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectDataTableController;
 
+Route::resource('posts', PostController::class)->middleware(['auth', 'verified'])->names('posts');
 
 // Rutas específicas primero (sin parámetros)
 Route::middleware(['auth', 'verified', 'role:admin,profesor'])->group(function () {
@@ -89,6 +91,17 @@ Route::get('/profesor', [ProfesorController::class, 'index'])
 Route::get('/visitante', [VisitanteController::class, 'index'])
     ->middleware(['auth', 'role:visitante'])
     ->name('visitante.index');
+
+// CRUD de Categoría
+Route::resource('categoria', CategoriaController::class)
+    ->middleware(['auth', 'role:admin'])
+    ->names('categoria')
+    ->parameters(['categoria' => 'categoria']);
+
+// CRUD de Rol Sector Agropecuario
+Route::resource('rol', RolSectorAgropecuarioController::class)
+    ->middleware(['auth', 'role:admin'])
+    ->names('rol');
 
 
 require __DIR__.'/auth.php';
